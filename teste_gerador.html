@@ -2,4 +2,10 @@
 <p id="al"></p>
 <p id="ls"></p>
 <script src=js/gerador.js></script>
+<script>
+	let testal = new Instr(AL_INSTR, 0);
+	let testls = new Instr(LS_INSTR, 1);
+	document.getElementById("al").innerHTML = testal.getString();
+	document.getElementById("ls").innerHTML = testls.getString();
+</script>
 </html>

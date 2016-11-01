@@ -2,6 +2,8 @@
 
 const LS_INSTR = 0; 			// flag para indicar que a instrução é load/store
 const AL_INSTR = 1; 			// flag das instruções aritméticas/lógicas
+const NOOP_INSTR = 2;			// flag para a instrução noop
+
 const N_REGISTERS = 8;			// número de registradores
 const MAX_IMMEDIATE_VAL = 100;	// valor máximo que um valor imediato numa instrução pode assumir
 
@@ -45,12 +47,9 @@ function is_immediate(instr_name)
 	return false;
 }
 
-function Instr(type, time)
+function Instr(type)
 {
 	this.type = type;	//LS_INSTR (0) ou AL_INSTR (1)
-	this.time = time;	// Tempo de início da instrução. A unidade de tempo será um ciclo de clock. Cada estágio do pipeline ocupará um ciclo.
-						// Considerar que a instrução começa no começo do ciclo indicado por time, ou seja, o primeiro estágio do pipeline (IF)
-						// executa no ciclo de número especificado por time.
 
 	if (type == LS_INSTR)
 	{
@@ -59,7 +58,7 @@ function Instr(type, time)
 		this.regsrc1 = random_register();		// registrador base para a posição de memória
 		this.immediate = random_immediate();	// valor imediato que representa o deslocamento a partir da base para acessar a memória
 	}
-	else
+	else if (type == AL_INSTR)
 	{
 		this.name = random_al_name();
 		this.regdst = random_register();		// registrador onde será armazenado o resultado
@@ -73,28 +72,27 @@ function Instr(type, time)
 			this.regsrc2 = random_register();		// registrador do segundo parâmetro
 		}
 	}
+	else
+		this.name = "noop";
 
 	// Constrói a string completa da instrução.
 	this.getString = function()
 	{
-		var ret;
+		let ret;
 		if (this.type == LS_INSTR)
 		{
 			ret = this.name + " R" + this.regdst + ", " + this.immediate + "(R" + this.regsrc1 + ")";
 		}
-		else
+		else if (this.type == AL_INSTR)
 		{
 			if (is_immediate(this.name))
 				ret = this.name + " R" + this.regdst + ", R" + this.regsrc1 + ", " + this.immediate;
 			else
 				ret = this.name + " R" + this.regdst + ", R" + this.regsrc1 + ", R" + this.regsrc2;
 		}
+		else if (this.type == NOOP_INSTR)
+			ret = this.name;
+
 		return ret;
 	}
 }
-
-/* Para testes (teste_gerador.html) */
-var testal = new Instr(AL_INSTR, 0);
-var testls = new Instr(LS_INSTR, 1);
-document.getElementById("al").innerHTML = testal.getString();
-document.getElementById("ls").innerHTML = testls.getString();

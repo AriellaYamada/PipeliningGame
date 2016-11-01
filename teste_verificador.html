@@ -1,0 +1,29 @@
+<html>
+<p id="instr0"></p>
+<p id="instr1"></p>
+<p id="instr2"></p>
+<p id="instr3"></p>
+<p id="instr4"></p>
+<p id="instr5"></p>
+<p id="instr6"></p>
+<p id="instr7"></p>
+<p id="instr8"></p>
+<p id="instr9"></p>
+<p id="res"></p>
+<script src=js/gerador.js></script>
+<script src=js/verificador.js></script>
+<script>
+	for (let i = 0; i < 6; i++)
+	{
+		let cur = new Instr(Math.floor(Math.random() * 3));
+		v.push(cur);
+		document.getElementById("instr" + i).innerHTML = cur.getString();
+	}
+
+	let res = verifica_estrutural();
+	if (res)
+		document.getElementById("res").innerHTML = "OK";
+	else
+		document.getElementById("res").innerHTML = "Hazards estruturais encontrados";
+</script>
+</html>
