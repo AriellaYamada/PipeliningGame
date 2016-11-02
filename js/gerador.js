@@ -96,3 +96,17 @@ function Instr(type)
 		return ret;
 	}
 }
+
+function generate_instr(){
+	var html = '';
+	for (var i = 0; i < 20; i++) {
+		var instr = new Instr(Math.floor(Math.random() * 3));
+		html += '<tr><td>' + i + '</td><td>' + instr.getString() + '</td></tr>';
+	}
+	console.log(html);
+	$('#instructions').html(html);
+}
+
+function clear_instr() {
+	document.getElementById('instructions').innerHTML = '';
+}
