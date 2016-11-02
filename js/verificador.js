@@ -34,7 +34,10 @@ function verifica_estrutural()
 		}
 	}
 
-	if (mem.some(maior_que_1) || reg.some(maior_que_1))
+	if (mem.some(maior_que_1) || reg.some(maior_que_1)){
+		console.log('OK');
 		return false;
+	}
+	console.log('Hazards estruturais encontrados');
 	return true;
 }
