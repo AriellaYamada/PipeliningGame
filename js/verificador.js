@@ -1,12 +1,13 @@
 const MAX_CLOCKS = 50	// Maior número de clocks que uma sequência de instruções poderá ocupar
-var v = [];				// Deve conter as instruções na ordem em que devem ser consideradas.
 
 function maior_que_1(valor)
 {
 	return valor > 1;
 }
 
-function verifica_estrutural()
+// Nas funções abaixo o parâmetro v deve ser um array com instruções
+
+function verifica_estrutural(v)
 {
 	let mem = [];	// a cada i associa quantas vezes a memória foi acessada no clock i
 	let reg = [];	// a cada i associa quantas vezes o banco de registradores foi acessado no clock i
@@ -36,5 +37,30 @@ function verifica_estrutural()
 
 	if (mem.some(maior_que_1) || reg.some(maior_que_1))
 		return false;
+	return true;
+}
+
+function verifica_dados(v)
+{
+	for (let i = 0; i < v.length; i++)
+	{
+		let r1 = -1, r2 = -1;
+		let timeneed = i + 1;
+		if ("regsrc1" in v[i])
+			r1 = v[i].regsrc1;
+		if ("regsrc2" in v[i])
+			r2 = v[i].regsrc2;
+
+		for (let j = i-1; j >= 0; j--)
+		{
+			if ("regdst" in v[j])
+			{
+				let timeready = j + 4;
+				if ((v[j].regdst == r1 || v[j].regdst == r2) && timeready >= timeneed)
+					return false;
+
+			}
+		}
+	}
 	return true;
 }
