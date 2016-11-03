@@ -2,9 +2,9 @@ var instructions;
 var exec_count = 0;
 var exec_rows = '';
 
-function generate_instr(){
+function gera_instrucoes(){
 	instructions = '';
-	clear_instr();
+	limpa_instrucoes();
 	for (var i = 0; i < 10; i++) {
 		var instr = new Instr(Math.floor(Math.random() * 3));
 		instructions += '<tr><td>' + i + '</td><td>' + instr.getString() + '</td></tr>';
@@ -20,7 +20,7 @@ function generate_instr(){
 	});
 }
 
-function clear_instr() {
+function limpa_instrucoes() {
 	exec_count = 0;
 	exec_rows = '';
 	document.getElementById('instructions').innerHTML = instructions;
@@ -33,4 +33,9 @@ function clear_instr() {
 		exec_count++;
 		document.getElementById('executions').innerHTML = exec_rows;
 	});
+}
+
+function ver_end() {
+	var size = document.getElementById('executions').rows.length;
+	//if(size == 10)
 }
