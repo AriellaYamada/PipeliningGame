@@ -49,10 +49,13 @@
         <div class="sidebar-nav navbar-collapse">
           <ul class="nav" id="side-menu">
             <li>
-              <a><button type="button" class="btn btn-outline btn-default" onclick="generate_instr()"><i class="fa fa-list fa-fw"></i> Gerar Instruções</button></a>
+              <a>Conceitos</a>
             </li>
             <li>
-              <a><button type="button" class="btn btn-outline btn-danger" onclick="clear_instr()"><i class="fa fa-trash-o fa-fw"></i> Limpar</button></a>
+              <a>Instruções</a>
+            </li>
+            <li>
+              <a>O Jogo</a>
             </li>
           </ul>
         </div>
@@ -66,7 +69,10 @@
           <h2 class="page-header">Ordene as instruções</h2>
         </div>
       </div>
-
+      <div class="row">
+          <a><button type="button" class="btn btn-outline btn-default" onclick="generate_instr()"><i class="fa fa-list fa-fw"></i> Gerar Instruções</button></a>
+          <a><button type="button" class="btn btn-outline btn-danger" onclick="clear_instr()"><i class="fa fa-trash-o fa-fw"></i> Limpar</button></a>
+      </div>
       <div class="row">
         <div class="col-lg-4">
           <div class="panel panel-default">
@@ -96,6 +102,18 @@
               Ordem de Execução
             </div>
             <div class="panel-body">
+              <div class="table-responsive">
+                <table id="texecutions" class="table table-striped">
+                  <thead>
+                    <tr>
+                      <th>#</th>
+                      <th>Instrução</th>
+                    </tr>
+                  </thead>
+                  <tbody id="executions">
+                  </tbody>
+                </table> <!-- /#table-stripped -->
+              </div> <!-- /#table-responsive -->
             </div> <!-- /#panel-body -->
           </div><!-- /#panel-panel -->
         </div><!-- /#col-lg-4 -->
@@ -127,7 +145,6 @@
 <script src="../dist/js/sb-admin-2.js"></script>
 <script src=../js/gerador.js></script>
 <script src=../js/verificador.js></script>
-<script src=../js/game.js></script>
 </body>
 
 </html>
