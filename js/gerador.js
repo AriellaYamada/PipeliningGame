@@ -118,7 +118,7 @@ function generate_instr(){
 }
 
 function clear_instr() {
-	document.getElementById('instructions').innerHTML = '';
+	document.getElementById('executions').innerHTML = '';
 	exec_count = 0;
 	exec_rows = '';
 }
