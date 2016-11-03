@@ -438,3 +438,6 @@ td {
     border-left-width: 0;
   }
 }
+p {
+  text-align: justify;
+}

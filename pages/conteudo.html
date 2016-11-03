@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="">
+  <meta name="author" content="">
+
+  <title>Pipelining Game</title>
+
+  <!-- Bootstrap Core CSS -->
+  <link href="../vendor/bootstrap/css/bootstrap.min.css" rel="stylesheet">
+
+  <!-- MetisMenu CSS -->
+  <link href="../vendor/metisMenu/metisMenu.min.css" rel="stylesheet">
+
+  <!-- Custom CSS -->
+  <link href="../dist/css/sb-admin-2.css" rel="stylesheet">
+
+  <!-- Morris Charts CSS -->
+  <link href="../vendor/morrisjs/morris.css" rel="stylesheet">
+
+  <!-- Custom Fonts -->
+  <link href="../vendor/font-awesome/css/font-awesome.min.css" rel="stylesheet" type="text/css">
+
+  <!-- HTML5 Shim and Respond.js IE8 support of HTML5 elements and media queries -->
+  <!-- WARNING: Respond.js doesn't work if you view the page via file:// -->
+  <!--[if lt IE 9]>
+  <script src="https://oss.maxcdn.com/libs/html5shiv/3.7.0/html5shiv.js"></script>
+  <script src="https://oss.maxcdn.com/libs/respond.js/1.4.2/respond.min.js"></script>
+  <![endif]-->
+
+</head>
+
+<body>
+
+  <div id="wrapper">
+
+    <!-- Navigation -->
+    <nav class="navbar navbar-default navbar-static-top" role="navigation" style="margin-bottom: 0">
+      <div class="navbar-header">
+        <button type="button" class="navbar-toggle" data-toggle="collapse" data-target=".navbar-collapse">
+            <span class="sr-only">Toggle navigation</span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+            <span class="icon-bar"></span>
+        </button>
+        <a class="navbar-brand" href="index.html">Pipelining Game</a>
+      </div>
+      <!-- #Sidebar -->
+      <div class="navbar-default sidebar" role="navigation">
+        <div class="sidebar-nav navbar-collapse">
+          <ul class="nav" id="side-menu">
+            <li>
+              <a href="conteudo.html">Conceitos</a>
+            </li>
+            <li>
+              <a href="instrucoes.html">Instruções</a>
+            </li>
+            <li>
+              <a href="jogo.html">O Jogo</a>
+            </li>
+          </ul>
+        </div>
+      </div>
+      <!-- /#Sidebar -->
+    </nav>
+    <div id="page-wrapper">
+      <div class="row">
+        <div class="col-lg-12">
+          <h1 class="page-header"> Conceitos </h1>
+          <h3>Sobre a arquitetura e o pipeline</h3>
+          <hr>
+          <p>
+            	A arquitetura considerada no jogo é uma arquitetura típica de Von Neumann. Ela possui caráter RISC e seu assembly, à exceção de pequenos detalhes, é igual ao assembly MIPS. Tem-se um processador com uma unidade lógico-aritmética e um banco de registradores o qual suporta apenas um acesso (seja para leitura ou escrita) por vez (ciclo de clock). No caso de acesso de leitura, considera-se que dois registradores podem ser lidos em um único acesso, para que a leitura dos dois operandos de certas instruções ocorra em apenas um ciclo. A memória principal, assim como o banco de registradores, só suporta um único acesso por ciclo de clock, porém, diferentemente deste, tanto o acesso de leitura como o de escrita envolvem apenas uma posição da memória. Dispositivos de entrada e saída, embora parte da arquitetura de Von Neumann, não fazem nenhuma aparição aqui.
+
+            	Além disso, a arquitetura conta com um pipeline de cinco estágios para execução de instruções. Cada estágio dura exatamente um ciclo de clock, e todas as instruções sempre passam por todos os estágios, mesmo se não houver nada a ser feito em algum deles. Os estágios do pipeline são:
+              <ul>
+                <li> Instruction Fetch (IF): nesse estágio, é feito acesso a memória para buscar o código da próxima instrução a ser executada.</li>
+            	  <li> Instruction Decode (ID): nesse estágio a unidade de controle decodifica a instrução obtida e faz acesso ao banco de registradores para buscar
+            	o(s) operando(s) necessário(s).</li>
+            	  <li> Execução da instrução (ALU): nesse estágio é feita a operação na unidade lógico-aritmética. Todas as instruções, exceto NOOP, tem a necessidade de realizar alguma operação na ALU durante sua execução.</li>
+            	  <li> Acesso a memória (MEM): nesse estágio ocorre o acesso de escrita ou leitura na memória principal. É importante lembrar que, numa arquitetura RISC como o MIPS, apenas instruções load/store realizam acessos a memória.</li>
+            	  <li> Escrita do resultado (WB): nesse estágio é feito um acesso de escrita ao banco do registradores para gravação do resultado da instrução.</li>
+              </ul>
+              Quaisquer dois estágios do pipeline podem estar executando ao mesmo tempo, desde que não haja nenhum hazard envolvido.
+            </p>
+            <h3> Sobre o jogo e os hazards: </h3>
+            <hr>
+            <p>
+              	O jogo consiste em ... (a definir exatamente). Seu objetivo é auxiliar alunos de computação no estudo de pipelines e alguns dos hazards envolvidos. A ferramenta também serve a professores, pois pode (ou não, vai depender...) ser vista como um gerador e corretor automático de um modelo não incomum de exercícios sobre pipelines.
+
+              	Nos blocos de código com os quais o jogo trabalha dois tipos de hazards são possíveis:
+                <ul>
+                  <li> Hazards estruturais: observa-se que ambos os estágios IF e MEM do pipeline podem tentar realizar acesso à memória. Como a memória só		permite um acesso por ciclo, não é permitido que ambos o façam ao mesmo tempo. Portanto bolhas podem ser necessárias para evitar que isso aconteça. O mesmo vale para os estágios ID e WB do pipeline, já que ambos realizam acesso ao banco de registradores.</li>
+              		<li>- Hazards de dependência de dados verdadeira: é possível que uma instrução precise ler de um registrador cujo conteúdo não está atualizado pois a última instrução que o modificou ainda não atingiu completou o estágio WB. Nesse caso, bolhas podem ser necessárias para fazer a nova instrução "esperar" até o registrador que requisita estar pronto.</li>
+                </ul>
+          </p>
+        </div>
+      </div>
+
+
+    </div> <!-- /#page-wrapper -->
+  </div>
+  <!-- /#wrapper -->
+
+  <!-- jQuery -->
+  <script src="../vendor/jquery/jquery.min.js"></script>
+
+  <!-- Bootstrap Core JavaScript -->
+  <script src="../vendor/bootstrap/js/bootstrap.min.js"></script>
+
+  <!-- Metis Menu Plugin JavaScript -->
+  <script src="../vendor/metisMenu/metisMenu.min.js"></script>
+
+  <!-- Morris Charts JavaScript -->
+  <script src="../vendor/raphael/raphael.min.js"></script>
+  <script src="../vendor/morrisjs/morris.min.js"></script>
+  <script src="../data/morris-data.js"></script>
+
+  <!-- Custom Theme JavaScript -->
+  <script src="../dist/js/sb-admin-2.js"></script>
+  <script src=../js/gerador.js></script>
+  <script src=../js/verificador.js></script>
+</body>
+
+</html>

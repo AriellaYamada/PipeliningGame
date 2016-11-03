@@ -10,8 +10,6 @@ const MAX_IMMEDIATE_VAL = 100;	// valor máximo que um valor imediato numa instr
 const LS_INSTR_NAMES = ["sw", "lw", "sb", "lb"];	// nomes de instruções load/store
 const AL_INSTR_NAMES = ["add", "sub", "addu", "subu", "mult", "multu", "div", "divu", "mul", "and", "or", "nor", "xor", "sll", "srl", "sra", "addi", "addiu", "andi", "ori", "xori"];						  // nomes de instruções ariméticas/lógicas
 
-var exec_count = 0;
-var exec_rows = '';
 // Retorna id de um registrador aleatório. Intervalo [0, N_REGISTERS-1].
 function random_register()
 {
@@ -97,28 +95,4 @@ function Instr(type)
 
 		return ret;
 	}
-}
-
-function generate_instr(){
-	var html = '';
-	for (var i = 0; i < 20; i++) {
-		var instr = new Instr(Math.floor(Math.random() * 3));
-		html += '<tr><td>' + i + '</td><td>' + instr.getString() + '</td></tr>';
-	}
-	console.log(html);
-	$('#instructions').html(html);
-	$("#instructions tr").dblclick(function(){
-	  $(this).addClass('selected').siblings().removeClass('selected');
-	  var instr = $(this).find('td:eq(1)').html();
-		$(this).remove();
-		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
-		exec_count++;
-		$('#executions').html(exec_rows);
-	});
-}
-
-function clear_instr() {
-	document.getElementById('executions').innerHTML = '';
-	exec_count = 0;
-	exec_rows = '';
 }
