@@ -73,14 +73,14 @@ function ver_end() {
 		let estrut_ok = verifica_estrutural(v);
 		let semantica_ok = verifica_semantica(vet_instr, vet_ordem);
 		var erros = "Ocorreram hazards do tipo:\n"
-		if(dados_ok) {
-			erros += "Hazards de dados.";
+		if(!dados_ok) {
+			erros += "- Hazards de dados\n";
 		}
-		if(estrut_ok) {
-			erros += "Hazards estruturais.";
+		if(!estrut_ok) {
+			erros += "- Hazards estruturais\n";
 		}
-		if(semantica_ok) {
-			erros += "Erros de semântica.";
+		if(!semantica_ok) {
+			erros += "- Erros de semântica\n";
 		}
 		document.getElementById('imprimeResultado').innerHTML = erros;
 
