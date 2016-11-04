@@ -72,13 +72,29 @@ function ver_end() {
 		let dados_ok = verifica_dados(v);
 		let estrut_ok = verifica_estrutural(v);
 		let semantica_ok = verifica_semantica(vet_instr, vet_ordem);
-		console.log("dados_ok = " + dados_ok + "\nestrut_ok = " + estrut_ok + "\nsemantica_ok = " + semantica_ok);
-		
-		let sol = solucao_otima(vet_instr);
-		console.log("Solução ótima:");
-		for (let i = 0; i < sol.length; i++)
-			console.log(sol[i].getString());
+		var erros = "Ocorreram hazards do tipo:\n"
+		if(dados_ok) {
+			erros += "Hazards de dados.";
+		}
+		if(estrut_ok) {
+			erros += "Hazards estruturais.";
+		}
+		if(semantica_ok) {
+			erros += "Erros de semântica.";
+		}
+		document.getElementById('imprimeResultado').innerHTML = erros;
+
+		//console.log("dados_ok = " + dados_ok + "\nestrut_ok = " + estrut_ok + "\nsemantica_ok = " + semantica_ok);
 	} else {
 		console.log("Não finalizado!");
 	}
+}
+
+function exibeSolucao() {
+	let sol = solucao_otima(vet_instr);
+	var result = "";
+	for (var i = 0; i < sol.length; i++) {
+		result += sol[i].getString() + '\n';
+	}
+	document.getElementById('imprimeResultado').innerHTML = result;
 }
