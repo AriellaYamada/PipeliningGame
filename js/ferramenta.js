@@ -19,7 +19,7 @@ function gera_instrucoes(){
 	document.getElementById('instructions').innerHTML = instructions;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
-		var pos = $(this).find('td:first').html();
+		let pos = $(this).find('td:first').html();
 		let instr = $(this).find('td:eq(1)').html();
 		v.push(vet_instr[pos]);
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
@@ -48,12 +48,15 @@ function limpa_instrucoes() {
 	document.getElementById('executions').innerHTML = exec_rows;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
+		let pos = $(this).find('td:first').html();
 		let instr = $(this).find('td:eq(1)').html();
-		$(this).remove();
 		v.push(vet_instr[pos]);
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
 		exec_count++;
+		instr_count++;
 		document.getElementById('executions').innerHTML = exec_rows;
+		document.getElementById('instructions').rows[pos].style.pointerEvents = 'none';
+		document.getElementById('instructions').rows[pos].style.backgroundColor = '#f2dede';
 	});
 }
 
