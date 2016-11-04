@@ -67,6 +67,7 @@ function verifica_dados(v)
 
 function verifica_semantica(v_orig, vi)
 {
+	/*
 	let g = gera_grafo_dependencia(v_orig);
 	let usado = [];
 
@@ -86,31 +87,45 @@ function verifica_semantica(v_orig, vi)
 
 		usado[vi[i]] = true;
 	}
+	*/
 
 	for (let i = 0; i < N_REGISTERS; i++)
 	{
-		let written_orig = [];
-		let written_cur = [];
+		let history_orig = [];
+		let history_cur = [];
 		for (let j = 0; j < v_orig.length; j++)
 		{
 			let instr = v_orig[j];
+			if ("regsrc1" in instr && instr.regsrc1 == i)
+				history_orig.push(-j-1);
+
+			if ("regsrc2" in instr && instr.regsrc2 == i)
+				history_orig.push(-j-1);
+
 			if ("regdst" in instr && instr.regdst == i)
-				written_orig.push(j);
+				history_orig.push(j+1);
 		}
+
 		for (let j = 0; j < vi.length; j++)
 		{
 			if (vi[j] < 0) continue;
 			let instr = v_orig[vi[j]];
+
+			if ("regsrc1" in instr && instr.regsrc1 == i)
+				history_cur.push(-vi[j]-1);
+
+			if ("regsrc2" in instr && instr.regsrc2 == i)
+				history_cur.push(-vi[j]-1);
+
 			if ("regdst" in instr && instr.regdst == i)
-				written_cur.push(vi[j]);
+				history_cur.push(vi[j]+1);
 		}
 
-		if (written_orig.length != written_cur.length)
+		if (history_orig.length != history_cur.length)
 			return false;
-		
-		for (let j = 0; j < written_orig.length; j++)
+		for (let j = 0; j < history_orig.length; j++)
 		{
-			if (written_orig[j] != written_cur[j])
+			if (history_orig[j] != history_cur[j])
 				return false;
 		}
 	}
