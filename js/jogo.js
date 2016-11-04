@@ -4,9 +4,9 @@ var instructions;
 var exec_count = 0;
 var exec_rows = '';
 
-let vet_instr;
+let vet_instr = [];
 vet_instr.length = NUM_INSTR;
-let vet_ordem;
+let vet_ordem = [];
 vet_ordem.length = NUM_INSTR;
 
 function gera_instrucoes(){
@@ -21,7 +21,6 @@ function gera_instrucoes(){
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
 		vet_ordem[exec_count] = $(this).find('td:first').html();
-		console.log(vet_ordem[exec_count]);
 		var instr = $(this).find('td:eq(1)').html();
 		$(this).remove();
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
@@ -45,9 +44,15 @@ function limpa_instrucoes() {
 	});
 }
 
-/*function ver_end() {
+function ver_end() {
 	var size = document.getElementById('executions').rows.length;
 	if(size == NUM_INSTR) {
-
+		let v = [];
+		for(var i = 0; i < NUM_INSTR; i++) {
+			v[i] = vet_instr[vet_ordem[i]];
+		}
+		console.log(verifica_dados(v));
+	} else {
+		console.log("Não finalizado!");
 	}
-}*/
+}

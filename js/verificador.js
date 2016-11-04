@@ -86,7 +86,6 @@ function verifica_dados(v)
 				let timeready = j + 4;
 				if ((v[j].regdst == r1 || v[j].regdst == r2) && timeready >= timeneed)
 					return false;
-
 			}
 		}
 	}
