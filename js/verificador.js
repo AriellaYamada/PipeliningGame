@@ -64,3 +64,25 @@ function verifica_dados(v)
 	}
 	return true;
 }
+
+function verifica_semantica(v_orig, vi)
+{
+	let g = gera_grafo_dependencia(v_orig);
+	let usado = [];
+
+	usado.length = v_orig.length;
+	usado.fill(false);
+
+	for (let i = 0; i < vi.length; i++)
+	{
+		let depende_de = g.dfs(vi[i]);
+		for (let j = 0; j < depende_de.length; j++)
+		{
+			if (depende_de[j] != vi[i] && !usado[depende_de[j]])
+				return false;
+		}
+
+		usado[vi[i]] = true;
+	}
+	return true;
+}

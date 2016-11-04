@@ -1,0 +1,25 @@
+<html>
+<head>
+<script src="../js/gerador.js"></script>
+<script src="../js/grafo.js"></script>
+</head>
+<body>
+<div id="content"></div>
+</body>
+<script>
+	let n = 7;
+	let content = document.getElementById("content");
+
+	v = gera_vetor(n);
+
+	for (let i = 0; i < n; i++)
+		content.innerHTML += "<p>" + i + ": " +  v[i].getString() + "</p>";
+	
+	g = gera_grafo_dependencia(v);
+	for (let i = 0; i < n; i++)
+	{
+		let d = g.dfs(i);
+		content.innerHTML += "<p>Instrução " + i + " depende de: " + d + "</p>";
+	}
+</script>
+</html>
