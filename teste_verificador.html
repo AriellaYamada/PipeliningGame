@@ -17,7 +17,7 @@
 	let v = [];
 	for (let i = 0; i < 6; i++)
 	{
-		let cur = new Instr(Math.floor(Math.random() * 3));
+		let cur = new Instr(Math.floor(Math.random() * 2));
 		v.push(cur);
 		document.getElementById("instr" + i).innerHTML = cur.getString();
 	}
@@ -36,6 +36,6 @@
 		document.getElementById("dados").innerHTML = "Hazards de dados foram encontrados.";
 
 
-	
+
 </script>
 </html>
