@@ -20,7 +20,7 @@ function gera_instrucoes(){
 	document.getElementById('instructions').innerHTML = instructions;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
-		let pos = $(this).find('td:first').html();
+		let pos = parseInt($(this).find('td:first').html(), 10);
 		let instr = $(this).find('td:eq(1)').html();
 		vet_ordem.push(pos);
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
@@ -48,7 +48,7 @@ function limpa_instrucoes() {
 	document.getElementById('executions').innerHTML = exec_rows;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
-		let pos = $(this).find('td:first').html();
+		let pos = parseInt($(this).find('td:first').html(), 10);
 		let instr = $(this).find('td:eq(1)').html();
 		vet_ordem.push(pos);
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
