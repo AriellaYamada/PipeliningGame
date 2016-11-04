@@ -20,7 +20,7 @@ function Graph(nv)
 	{
 		vis[u] = true;
 		visited.push(u);
-		for (let i = 0; i < n; i++)
+		for (let i = 0; i < this.n; i++)
 		{
 			if (this.adj[u][i] && !vis[i])
 				this.realdfs(i, vis, visited);
@@ -31,7 +31,7 @@ function Graph(nv)
 	{
 		let vis = [];		// vetor que marca os visitados
 		let visited = [];	// vetor de retorno que vai conter os índices dos nós visitados
-		vis.length = n;
+		vis.length = this.n;
 		vis.fill(false);
 
 		this.realdfs(u, vis, visited);

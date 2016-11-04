@@ -75,6 +75,8 @@ function verifica_semantica(v_orig, vi)
 
 	for (let i = 0; i < vi.length; i++)
 	{
+		if (vi[i] < 0) continue;
+
 		let depende_de = g.dfs(vi[i]);
 		for (let j = 0; j < depende_de.length; j++)
 		{
@@ -83,6 +85,34 @@ function verifica_semantica(v_orig, vi)
 		}
 
 		usado[vi[i]] = true;
+	}
+
+	for (let i = 0; i < N_REGISTERS; i++)
+	{
+		let written_orig = [];
+		let written_cur = [];
+		for (let j = 0; j < v_orig.length; j++)
+		{
+			let instr = v_orig[j];
+			if ("regdst" in instr && instr.regdst == i)
+				written_orig.push(j);
+		}
+		for (let j = 0; j < vi.length; j++)
+		{
+			if (vi[j] < 0) continue;
+			let instr = v_orig[vi[j]];
+			if ("regdst" in instr && instr.regdst == i)
+				written_cur.push(vi[j]);
+		}
+
+		if (written_orig.length != written_cur.length)
+			return false;
+		
+		for (let j = 0; j < written_orig.length; j++)
+		{
+			if (written_orig[j] != written_cur[j])
+				return false;
+		}
 	}
 	return true;
 }
