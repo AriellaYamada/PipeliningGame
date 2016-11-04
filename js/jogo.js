@@ -1,27 +1,25 @@
 const NUM_INSTR = 10;
 
 var instructions;
-var exec_count = 0;
 var exec_rows = '';
+var exec_count = 0;
 
-let vet_instr = [];
-vet_instr.length = NUM_INSTR;
-let vet_ordem = [];
-vet_ordem.length = NUM_INSTR;
+var vet_instr = [];
+var vet_ordem = [];
 
 function gera_instrucoes(){
 	instructions = '';
 	limpa_instrucoes();
-	for (var i = 0; i < NUM_INSTR; i++) {
+	for (let i = 0; i < NUM_INSTR; i++) {
 		let instr = new Instr(Math.floor(Math.random() * 3));
-		vet_instr[i] = instr;
+		vet_instr.push(instr);
 		instructions += '<tr><td>' + i + '</td><td>' + instr.getString() + '</td></tr>';
 	}
 	document.getElementById('instructions').innerHTML = instructions;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
-		vet_ordem[exec_count] = $(this).find('td:first').html();
-		var instr = $(this).find('td:eq(1)').html();
+		vet_ordem.push($(this).find('td:first').html());
+		let instr = $(this).find('td:eq(1)').html();
 		$(this).remove();
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
 		exec_count++;
@@ -32,11 +30,13 @@ function gera_instrucoes(){
 function limpa_instrucoes() {
 	exec_count = 0;
 	exec_rows = '';
+	vet_ordem.length = 0;
 	document.getElementById('instructions').innerHTML = instructions;
 	document.getElementById('executions').innerHTML = exec_rows;
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
-		var instr = $(this).find('td:eq(1)').html();
+		vet_ordem.push($(this).find('td:first').html());
+		let instr = $(this).find('td:eq(1)').html();
 		$(this).remove();
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
 		exec_count++;
@@ -45,13 +45,15 @@ function limpa_instrucoes() {
 }
 
 function ver_end() {
-	var size = document.getElementById('executions').rows.length;
+	let size = document.getElementById('executions').rows.length;
 	if(size == NUM_INSTR) {
 		let v = [];
-		for(var i = 0; i < NUM_INSTR; i++) {
-			v[i] = vet_instr[vet_ordem[i]];
+		for(let i = 0; i < NUM_INSTR; i++) {
+			v.push(vet_instr[vet_ordem[i]]);
 		}
-		console.log(verifica_dados(v));
+		let dados_flag = verifica_dados(v);
+		let estrut_flag = verifica_estrutural(v);
+		console.log("Dados: " + dados_flag + "\nEstrutural: " + estrut_flag);
 	} else {
 		console.log("Não finalizado!");
 	}

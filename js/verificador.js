@@ -35,36 +35,9 @@ function verifica_estrutural(v)
 		}
 	}
 
-	if (mem.some(maior_que_1) || reg.some(maior_que_1)){
-		console.log('OK');
+	if (mem.some(maior_que_1) || reg.some(maior_que_1))
 		return false;
-	}
-	console.log('Hazards estruturais encontrados');
-	return true;
-}
-
-function verifica_dados(v)
-{
-	for (let i = 0; i < v.length; i++)
-	{
-		let r1 = -1, r2 = -1;
-		let timeneed = i + 1;
-		if ("regsrc1" in v[i])
-			r1 = v[i].regsrc1;
-		if ("regsrc2" in v[i])
-			r2 = v[i].regsrc2;
-
-		for (let j = i-1; j >= 0; j--)
-		{
-			if ("regdst" in v[j])
-			{
-				let timeready = j + 4;
-				if ((v[j].regdst == r1 || v[j].regdst == r2) && timeready >= timeneed)
-					return false;
-
-			}
-		}
-	}
+	
 	return true;
 }
 
