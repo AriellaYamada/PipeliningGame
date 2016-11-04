@@ -1,0 +1,27 @@
+<html>
+<head>
+<script src="../js/grafo.js"></script>
+<script src="../js/gerador.js"></script>
+<script src="../js/verificador.js"></script>
+<script src="../js/solucionador.js"></script>
+</head>
+<body>
+<div id="content"></div>
+</body>
+<script>
+	let n = 7;
+	let content = document.getElementById("content");
+
+	v = gera_vetor(n);
+
+	for (let i = 0; i < n; i++)
+		content.innerHTML += "<p>" + v[i].getString() + "</p>";
+	
+	content.innerHTML += "<p>--------</p>";
+
+	sol = solucao_otima(v);
+	for (let i = 0; i < sol.length; i++)
+		content.innerHTML += "<p>"  + sol[i].getString() + "</p>";
+
+</script>
+</html>

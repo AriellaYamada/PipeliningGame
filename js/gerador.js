@@ -135,12 +135,13 @@ function gera_vetor(tamanho)
 	return v;
 }
 
-// Dado um vetor de instruções v, retorna o número mínimo de NOOPs necessários
-// para aquela sequência de instruções não ter hazards estruturais nem de dados.
-function calcula_noop(v)
+// Dado um vetor de instruções v, retorna um outro vetor de instruções com NOOPs adicionados.
+// É adicionado o número mínimo de NOOPs necessários para que a nova sequência de instruções
+// não tenha hazards de dados nem estruturais.
+function insere_noops(v)
 {
 	let vv = [];
-	let ret = 0;
+	let cnt = 0;
 	for (let i = 0; i < v.length; i++)
 	{
 		let ok = false;
@@ -153,13 +154,11 @@ function calcula_noop(v)
 			{
 				vv.pop();
 				vv.push(new Instr(NOOP_INSTR));
-				ret++;
+				cnt++;
 			}
 		}
 	}
-	for (let i = 0; i < vv.length; i++)
-		console.log(vv[i].getString());
-	return ret;
+	return vv;
 }
 
 function gera_grafo_dependencia(v)
