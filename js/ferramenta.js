@@ -21,11 +21,13 @@ function gera_instrucoes(){
 		var pos = $(this).find('td:first').html();
 		console.log(pos);
 		let instr = $(this).find('td:eq(1)').html();
-		$(this).remove();
+		//$(this).prop('disabled', true);
 		v.push(vet_instr[pos]);
 		exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr + '</td></tr>';
 		exec_count++;
 		document.getElementById('executions').innerHTML = exec_rows;
+		document.getElementById('instructions').rows[pos].style.pointerEvents = 'none';
+		document.getElementById('instructions').rows[pos].style.backgroundColor = '#f2dede';
 	});
 }
 
