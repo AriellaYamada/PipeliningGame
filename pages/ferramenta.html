@@ -138,8 +138,25 @@
         </div><!-- /#col-lg-4 -->
 
       </div><!-- /#row -->
-        <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" onclick="ver_end()">Testar!</button>
-      </div>
+      <div class="row">
+        <button type="button" class="btn btn-outline btn-primary btn-lg btn-block" onclick="ver_end()" data-toggle="modal" data-target="#resultados">Testar!</button>
+        <!-- Modal -->
+        <div class="modal fade" id="resultados" tabindex="-1" role="dialog" aria-labelledby="exibeResultados">
+          <div class="modal-dialog" role="document">
+            <div class="modal-content">
+              <div class="modal-header">
+                <h4 class="modal-title" id="exibeResultados">Resultado de Execução</h4>
+              </div> <!-- modal-header -->
+              <div class="modal-body">
+                <span id="imprimeResultado"></span>
+              </div> <!-- modal-body -->
+              <div class="modal-footer">
+                <button type="button" class="btn btn-outline btn-primary">Ver melhor resposta</button>
+              </div> <!-- modal-footer -->
+            </div> <!-- modal-content -->
+          </div> <!-- modal-dialog -->
+        </div> <!-- modal fade -->
+      </div> <!-- row -->
 
     </div> <!-- /#page-wrapper -->
   </div>
@@ -161,7 +178,7 @@
 
   <!-- Custom Theme JavaScript -->
   <script src="../dist/js/sb-admin-2.js"></script>
-  
+
   <script src="../js/grafo.js"></script>
   <script src="../js/gerador.js"></script>
   <script src="../js/verificador.js"></script>
