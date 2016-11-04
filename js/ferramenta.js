@@ -19,7 +19,6 @@ function gera_instrucoes(){
 	$("#instructions tr").dblclick(function(){
 		$(this).addClass('selected').siblings().removeClass('selected');
 		var pos = $(this).find('td:first').html();
-		console.log(pos);
 		let instr = $(this).find('td:eq(1)').html();
 		//$(this).prop('disabled', true);
 		v.push(vet_instr[pos]);
@@ -32,7 +31,6 @@ function gera_instrucoes(){
 }
 
 function adiciona_noop() {
-	console.log('teste');
 	let instr = new Instr(NOOP_INSTR);
 	v.push(instr);
 	exec_rows += '<tr><td>' + exec_count + '</td><td>' + instr.getString() + '</td></tr>';
@@ -59,11 +57,7 @@ function limpa_instrucoes() {
 
 function ver_end() {
 	let size = document.getElementById('executions').rows.length;
-	if(size == NUM_INSTR) {
 		let dados_flag = verifica_dados(v);
 		let estrut_flag = verifica_estrutural(v);
 		console.log("Dados: " + dados_flag + "\nEstrutural: " + estrut_flag);
-	} else {
-		console.log("Não finalizado!");
-	}
 }
