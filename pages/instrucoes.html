@@ -87,6 +87,28 @@
               </p>
             </div> <!-- /#panel-body -->
           </div> <!-- /#panel-default -->
+          <h1 class="page-header"> Objetivos </h1>
+          <div class="panel panel-default">
+            <div class="panel-body">
+              <p>
+                dada uma sequência de instruções, o usuário deve reordená-las e adicionar bolhas de forma que nenhum dos hazards mencionados acima aconteçam. A ferramenta julga a tentativa do usuário: se nenhum hazard intratado for detectado, a ferramenta diz se a solução fornecida pelo usuário é mínima em termos de NOOPs ou não. Caso algum hazard seja encontrado, seu tipo é especificado, podendo ser um entre:
+                <ul>
+                  <li>Estrutural</li>
+                  <li>De dados (para hazards causados por dependências de dados verdadeiras)</li>
+                  <li>Semântico (para hazards causado por dependências de saídas e antidependências)</li>
+                </ul>
+                Espera-se então que o usuário tente encontrar o problema e corrigí-lo. Também há a opção de se consultar uma solução ótima gerada automaticamente pela ferramenta.
+              </p>
+                <hr>
+                <b>IMPORTANTE:</b>
+                <p>devido a uma limitação da ferramenta, para que hazards semânticos não sejam detectados, é necessário respeitar a seguinte regra:
+                Para cada registrador R, a sequência de leituras e escritas feitas em R não deve ter sua ordem alterada com relação ao código original.
+                Note que ao seguir essa regra garante-se que nenhuma dependência de saída ou antidependência pode ocorrer, bem como garante-se que dependências de dados verdadeiras serão respeitadas (não serão quebradas por reordenações).
+                Embora possam existir soluções corretas que não respeitem a regra acima, infelizmente sua correta validação exige algoritmos consideravelmente
+                mais complexos que não puderam ser implementados na ferramenta.
+              </p>
+            </div> <!-- /#panel-body -->
+          </div> <!-- /#panel-default -->
         </div> <!-- /#col-lg-12 -->
       </div> <!-- /#row -->
     </div> <!-- /#page-wrapper -->

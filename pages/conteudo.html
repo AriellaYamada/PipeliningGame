@@ -112,7 +112,12 @@
                   Nos blocos de código com os quais o jogo trabalha dois tipos de hazards são possíveis:
                   <ul>
                     <li> Hazards estruturais: observa-se que ambos os estágios IF e MEM do pipeline podem tentar realizar acesso à memória. Como a memória só		permite um acesso por ciclo, não é permitido que ambos o façam ao mesmo tempo. Portanto bolhas podem ser necessárias para evitar que isso aconteça. O mesmo vale para os estágios ID e WB do pipeline, já que ambos realizam acesso ao banco de registradores.</li>
-                    <li> Hazards de dependência de dados verdadeira: é possível que uma instrução precise ler de um registrador cujo conteúdo não está atualizado pois a última instrução que o modificou ainda não atingiu completou o estágio WB. Nesse caso, bolhas podem ser necessárias para fazer a nova instrução "esperar" até o registrador que requisita estar pronto.</li>
+                    <li> Hazards de dados:</li>
+                    <ul>
+                      <li>Causado por dependência verdadeira: é possível que uma instrução precise ler de um registrador cujo conteúdo não está atualizado pois a última instrução que o modificou ainda não atingiu completou o estágio WB. Nesse caso, bolhas/reordenações podem ser necessárias para fazer a nova instrução "esperar" até o registrador que requisita estar pronto.</li>
+                      <li>Causado por dependência de saída: esse hazard surgem da reordenação das instruções. A dependência de saída acontece quando duas ou mais instruções escrevem em um registrador R e uma instrução futura utiliza o valor de R. Nesse momento é preciso que o valor em R seja o valor escrito pela última instrução a escrever em R, então qualquer reordenação de instruções precisa respeitar isso.</li>
+                      <li>Causado por antidependência: similarmente ao anterior, esses hazard acontece devido a reordenações da ordem de execução original das instruções. Mais especificamente acontece quando uma instrução A lê de um registrador R e posteriormente uma instrução B escreve em R. Se, em uma reordenação, a instrução B executar antes da instrução A, então esta lerá o valor de R atualizado por B quando deveria estar lendo o valor antigo, anterior à atualização feita por B. Uma reordenação de instruções, portanto, precisa levar em conta a possibilidade de geração de antidependências e sempre evitar o hazard.</li>
+                    </ul>
                   </ul>
                 </p>
               </div> <!-- /#panel-body -->
