@@ -83,7 +83,7 @@
           <div class="panel panel-default">
             <div class="panel-body">
               <p>
-                Para trabalhar com a ferramenta, basta abrir na aba da barra à esquerda da tela escrita ‘A Ferramenta’. Ao clicar no botão “Gerar Instruções” na parte superior da tela, as instruções irão aparecer na tabela da esquerda. Para colocar uma instrução na pilha para execução, clique duas vezes sobre a mesma. Elas irão aparecer na tabela da direita e ficarão bloqueadas na tabela da esquerda para que não possam mais ser selecionadas. Ao colocar todas as instruções da tabela da esquerdaa para a da esquerda, clicar no botão “Testar” abaixo. Uma janela irá aparecer com os conflitos, ou não, gerados. Para verificar a saída ótima, clicar no botão “Ver melhor resposta” na janela.
+                Para trabalhar com a ferramenta, basta abrir na aba da barra à esquerda da tela, escrita “A Ferramenta”. Ao clicar no botão “Gerar Instruções” na parte superior da tela, uma sequência de instruções gerada aleatoriamente irá aparecer na tabela da esquerda. Clicando-se duas vezes sobre uma instrução, ela é inserida na tabela da direita, a qual representa a sequência de instruções a ser executada conforme o aluno determinar. Quando inserida na tabela da direita, a instrução ficará bloqueada na tabela da esquerda para que não possa mais ser selecionada. Também é possível inserir qualquer número de instruções NOOP a qualquer momento, clicando no botão apropriado. Ao colocar todas as instruções da tabela da esquerda para a direita e clicar no botão “Testar”, uma janela irá aparecer dizendo quais conflitos foram ou não gerados. Nesse janela há um botão “Ver melhor resposta” que permite conferir uma solução ótima em termos de número de NOOPs usados, a qual é gerada automaticamente pela ferramenta.
               </p>
             </div> <!-- /#panel-body -->
           </div> <!-- /#panel-default -->
@@ -97,15 +97,12 @@
                   <li>De dados (para hazards causados por dependências de dados verdadeiras)</li>
                   <li>Semântico (para hazards causado por dependências de saídas e antidependências)</li>
                 </ul>
-                Espera-se então que o usuário tente encontrar o problema e corrigí-lo. Também há a opção de se consultar uma solução ótima gerada automaticamente pela ferramenta.
+                Espera-se então que o usuário tente encontrar os problemas e corrigí-los até obter uma sequência correta para execução das instruções dadas. Também é desejável que se tente fazê-lo utilizando o menor número de instruções NOOPs possíveis. Está disponível uma opção de se consultar uma solução ótima em termos de números de NOOPs gerada automaticamente pela ferramenta.
               </p>
                 <hr>
                 <b>IMPORTANTE:</b>
-                <p>devido a uma limitação da ferramenta, para que hazards semânticos não sejam detectados, é necessário respeitar a seguinte regra:
-                Para cada registrador R, a sequência de leituras e escritas feitas em R não deve ter sua ordem alterada com relação ao código original.
-                Note que ao seguir essa regra garante-se que nenhuma dependência de saída ou antidependência pode ocorrer, bem como garante-se que dependências de dados verdadeiras serão respeitadas (não serão quebradas por reordenações).
-                Embora possam existir soluções corretas que não respeitem a regra acima, infelizmente sua correta validação exige algoritmos consideravelmente
-                mais complexos que não puderam ser implementados na ferramenta.
+                <p>
+                devido a uma limitação da ferramenta, para que hazards semânticos não sejam detectados, é necessário respeitar a seguinte regra: Para cada registrador R, a sequência de leituras e escritas feitas em R não deve ter sua ordem alterada com relação ao código original. Note que ao seguir essa regra garante-se que nenhuma dependência de saída ou antidependência pode ocorrer, bem como garante-se que dependências de dados verdadeiras serão respeitadas (não serão quebradas por reordenações). Embora possam existir soluções corretas que não respeitem a regra acima, infelizmente sua correta validação exige algoritmos consideravelmente mais complexos que não puderam ser implementados na ferramenta.
               </p>
             </div> <!-- /#panel-body -->
           </div> <!-- /#panel-default -->
